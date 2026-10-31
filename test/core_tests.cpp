@@ -491,9 +491,17 @@ namespace
         check (KitScanner::findKitsUnder ("/definitely/not/here").empty(), "missing root yields nothing");
 
         // GLORP_KITS_PATH drives the default search.
+    #ifdef _WIN32
+        _putenv_s ("GLORP_KITS_PATH", kitsRoot.string().c_str());
+    #else
         ::setenv ("GLORP_KITS_PATH", kitsRoot.string().c_str(), 1);
+    #endif
         auto defaults = KitScanner::defaultSearchPaths();
+    #ifdef _WIN32
+        _putenv_s ("GLORP_KITS_PATH", "");
+    #else
         ::unsetenv ("GLORP_KITS_PATH");
+    #endif
 
         check (! defaults.empty(), "env var contributes a search root");
         check (! defaults.empty() && defaults.front() == kitsRoot.string(), "env var root is searched first");

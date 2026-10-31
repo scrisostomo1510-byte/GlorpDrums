@@ -104,7 +104,6 @@ SpaceBeforeInheritanceColon: true
 SpaceBeforeCpp11BracedList: true
 SpacesBeforeTrailingComments: 1
 Standard: c++20
-TemplateDepth: 256
 
 # Disable formatting for specific patterns (JUCE macros etc.)
 # DisableFormat: false
